@@ -1,0 +1,57 @@
+.top {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    position: sticky; /* stick the topbar to a position */
+    top: 0; /* put the topbar at 0px from top */
+    font-family: 'Josefin Sans', sans-serif;
+    display: flex;
+    align-items: center;
+}
+
+.topLeft, .topRight {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topCenter {
+    flex: 6;
+}
+
+.topIcon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #444;
+    cursor: pointer;
+}
+
+.topImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.topList {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.topListItem {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.topSearchIcon {
+    font-size: 18px;
+    color: #666;
+    margin-left: 15px;
+    cursor: pointer;
+}
