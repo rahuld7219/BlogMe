@@ -9,6 +9,7 @@
     align-items: center;
 }
 
+/* Splitting top into 12 parts(like in bootstrap), out of which topLeft and topRight given 3 parts each and topCenter given 6 parts */
 .topLeft, .topRight {
     flex: 3;
     display: flex;
