@@ -7,6 +7,7 @@
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
     align-items: center;
+    z-index: 999; /* put navbar above everything */
 }
 
 /* Splitting top into 12 parts(like in bootstrap), out of which topLeft and topRight given 3 parts each and topCenter given 6 parts */

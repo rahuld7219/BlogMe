@@ -31,6 +31,9 @@
 
 .sidebarItem > img {
     margin-top: 15px;
+    width: 80%;
+    height: 40%;
+    object-fit: cover;
 }
 
 .sidebarItem > p {
