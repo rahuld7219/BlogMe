@@ -1,4 +1,5 @@
-import Settings from "./components/pages/settings/Settings";
+import Login from "./components/pages/login/Login";
+import Register from "./components/pages/register/Register";
 import TopBar from "./components/topbar/TopBar";
 
 
@@ -6,7 +7,8 @@ function App() {
   return (
     <>
       <TopBar />
-      <Settings />
+      <Login />
+      {/* <Register /> */}
     </>
   );
 }
