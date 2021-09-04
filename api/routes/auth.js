@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
         res.status(200).json(user); // sending a json response instead of rendering page or sending text
     } catch (err) {
         res.status(500).json(err);
-        /* can handle error better, instead of always setting response code 500 for every error */
+        /* can handle this error better, instead of always setting response code 500 for every error */
     }
 });
 

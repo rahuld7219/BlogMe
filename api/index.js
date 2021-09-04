@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
+const usersRoute = require("./routes/users");
+
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -18,6 +20,7 @@ mongoose.connect(dbUrl)
 })
 
 app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
 
 app.listen(8080, () => {
     console.log("Backend running at port 8080");
