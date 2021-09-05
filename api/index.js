@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts");
+const categoryRoute = require("./routes/categories");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -22,7 +23,8 @@ mongoose.connect(dbUrl)
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
-app.use("/api/posts", postRoute)
+app.use("/api/posts", postRoute);
+app.use("/api/categories", categoryRoute);
 
 app.listen(8080, () => {
     console.log("Backend running at port 8080");
