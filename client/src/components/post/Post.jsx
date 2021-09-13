@@ -1,35 +1,27 @@
 import './post.css';
-
-export default function Post() {
+import { Link } from "react-router-dom";
+export default function Post({ post }) {
     return (
         <div className="post">
-            <img
-                className="postImg"
-                src="https://antranik.org/wp-content/uploads/2011/08/mind-blowing-amazing-awesome-random-facts-1024x1024.jpg"
-                alt=""
-            />
+            {post.photo && (
+                <img
+                    className="postImg"
+                    src={post.photo}
+                    alt=""
+                />)
+            }
             <div className="postInfo">
                 <div className="postCategories">
-                    <span className="postCategory">Life</span>
-                    <span className="postCategory">Music</span>
+                    {post.categories.map((category) => <span className="postCategory">{category}</span>)}
                 </div>
-                <span className="postTitle">Lorem ipsum dolor sit amet</span>
+                <Link to={`/post/${post._id}`} className="link">
+                    <span className="postTitle">{post.title}</span>
+                </Link>
                 <hr />
-                <span className="postDate">1 hour ago</span>
+                <span className="postDate">{new Date(post.createdAt).toDateString()}</span>
             </div>
             <p className="postDesc">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                Quis magni nulla dolorum cum explicabo laborum unde sint 
-                aliquam, expedita temporibus dolorem voluptatum officiis 
-                laboriosam incidunt minus! Hic voluptas rem voluptatibus?
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                Quis magni nulla dolorum cum explicabo laborum unde sint 
-                aliquam, expedita temporibus dolorem voluptatum officiis 
-                laboriosam incidunt minus! Hic voluptas rem voluptatibus?
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                Quis magni nulla dolorum cum explicabo laborum unde sint 
-                aliquam, expedita temporibus dolorem voluptatum officiis 
-                laboriosam incidunt minus! Hic voluptas rem voluptatibus?
+                {post.desc}
             </p>
         </div>
     )
