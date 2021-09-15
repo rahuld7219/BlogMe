@@ -18,6 +18,18 @@ export default function SinglePost() {
         getPost();
     }, []);
     const imgDir = "http://localhost:8080/images";
+
+    const handleDelete = async () => {
+        try {
+            await axios.delete(`/posts/${postId}`, {
+                data: { username: user.username } // unlike post method, when using delete method in axios we must specify data property to send data
+            });
+            window.location.replace("/");
+        } catch (err) {
+            // code
+        }
+    }
+
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
@@ -31,7 +43,7 @@ export default function SinglePost() {
                     {post.username === user?.username && // ?. is optional chaining operator
                         <div className="singlePostEdit">
                             <i className="singlePostIcon far fa-edit"></i>
-                            <i className="singlePostIcon far fa-trash-alt"></i>
+                            <i className="singlePostIcon far fa-trash-alt" onClick={handleDelete}></i>
                         </div>}
                 </h1>
                 <div className="singlePostInfo">
