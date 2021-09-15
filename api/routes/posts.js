@@ -19,9 +19,9 @@ router.put("/:id", async (req, res) => {
         if (req.body.username === post.username) {
             try {
                 const updatedPost = await Post.findByIdAndUpdate( // you can use updateOne() instead as post has already been found above
-                    req.params.id,
-                    { $set: req.body },
-                    { new: true }
+                    req.params.id, // find by this id
+                    { $set: req.body }, // update the data (merge, not overwrite)
+                    { new: true } // return updated document
                 );
                 res.status(200).json(updatedPost);
             } catch (err) {
