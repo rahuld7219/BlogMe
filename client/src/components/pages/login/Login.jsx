@@ -9,7 +9,7 @@ export default function Login() {
     const usernameRef = useRef(); // we could use useState and onChange attribute instead of ref
     const passwordRef = useRef();
 
-    const { user, dispatch, isFetching, isError } = useContext(Context);
+    const { dispatch, isFetching } = useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
