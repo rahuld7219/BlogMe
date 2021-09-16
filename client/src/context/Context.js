@@ -1,4 +1,4 @@
-// Context for LOGIN System
+// Context for user System
 
 import { createContext, useEffect, useReducer } from "react";
 import Reducer from "./Reducer";

@@ -19,7 +19,7 @@ router.put("/:id", async (req, res) => {
                 { new: true } // by default, findByIdAndUpdate returns old document before updating, to return new updated one we pass new parameter as true
             );
             const { password, ...rest } = updatedUser._doc;
-            res.status(400).json(rest);
+            res.status(200).json(rest);
 
         } catch (err) {
             res.status(500).json(err);

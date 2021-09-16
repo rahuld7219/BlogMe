@@ -7,6 +7,8 @@ import { Logout } from "../../context/Actions"
 export default function Topbar() {
     const { user, dispatch } = useContext(Context);
 
+    const imgDir = "http://localhost:8080/images";
+
     const handleLogout = () => {
         dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
     }
@@ -40,10 +42,13 @@ export default function Topbar() {
             </div>
             <div className="topRight">
                 {user ? (
-                    <img className="topImg"
-                        src={user.profilePic}
-                        alt="profile-pic"
-                    />
+                    <Link to="/settings">
+                        <img
+                            className="topImg"
+                            src={`${imgDir}/${user.profilePic}`}
+                            alt="profile-pic"
+                        />
+                    </Link>
                 ) : (
                     <div className="topList">
                         <div className="topListItem">

@@ -11,6 +11,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
+
 app.use(express.json()); // to parse the incoming requests with JSON payloads
 
 // specify images folder, whenever request comes for path /images

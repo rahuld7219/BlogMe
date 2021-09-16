@@ -1,4 +1,4 @@
-// Reducer for LOGIN System
+// Reducer for user System
 
 const Reducer = (state, action) => {
     switch (action.type) {
@@ -17,6 +17,23 @@ const Reducer = (state, action) => {
         case "LOGIN_FAILURE":
             return {
                 user: null,
+                isFetching: false,
+                isError: true
+            };
+        case "UPDATE_START":
+            return {
+                ...state, // isError and user data remains same
+                isFetching: true,
+            };
+        case "UPDATE_SUCCESS":
+            return {
+                user: action.payload, // payload have the user info
+                isFetching: false,
+                isError: false
+            };
+        case "UPDATE_FAILURE":
+            return {
+                user: state.user, // user data remains same
                 isFetching: false,
                 isError: true
             };
