@@ -27,7 +27,7 @@ const Reducer = (state, action) => {
             };
         case "UPDATE_SUCCESS":
             return {
-                user: action.payload, // payload have the user info
+                user: {...action.payload, accessToken: state.user.accessToken/*, refreshToken: state.user.refreshToken*/}, // payload have the user info
                 isFetching: false,
                 isError: false
             };
@@ -43,6 +43,11 @@ const Reducer = (state, action) => {
                 isfetching: false,
                 isError: false
             };
+        // case "RENEW_TOKENS":
+        //     return {
+        //         ...state,
+        //         user: {...state.user, accessToken: action.payload.accessToken, refreshToken: action.payload.refreshToken}
+        //     };
         default:
             return state; // returns the current state
     }

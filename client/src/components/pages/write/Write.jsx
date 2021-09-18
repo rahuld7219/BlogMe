@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useContext, useState } from 'react';
 import { Context } from '../../../context/Context';
+import { Logout } from '../../../context/Actions';
 import './write.css';
 
 export default function Write() {
@@ -8,7 +9,7 @@ export default function Write() {
     const [desc, setDesc] = useState("");
     const [file, setFile] = useState(null);
 
-    const { user } = useContext(Context);
+    const { user, dispatch } = useContext(Context);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,10 +33,19 @@ export default function Write() {
         }
         // create post
         try {
-            const res = await axios.post("/posts", newPost);
+            const res = await axios.post("/posts", newPost, {
+                headers: {
+                    authorization: `Bearer ${user.accessToken}`
+                }
+            });
             window.location.replace(`/post/${res.data._id}`); // after successful post creation, go to that single post page
         } catch (err) {
-            //code
+            if (err.response.status === 401 || err.response.status === 403) {
+                dispatch(Logout());
+                window.location.replace("/login");
+            } else {
+                console.log(err);
+            }
         }
     }
 

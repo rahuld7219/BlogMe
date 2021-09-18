@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Category = require("../models/Category");
+const authorize = require("../middlewares");
 
 // CREATE CATEGORY
-router.post("/", async (req, res) => {
+router.post("/", authorize, async (req, res) => {
     const newCategory = new Category(req.body);
     try {
         const savedCategory = await newCategory.save();

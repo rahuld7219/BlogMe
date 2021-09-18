@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const authorize = require("../middlewares");
 
 // CREATE POST
-router.post("/", async (req, res) => {
+router.post("/", authorize, async (req, res) => {
     const newPost = new Post(req.body);
     try {
         const savedPost = await newPost.save();
@@ -13,7 +14,7 @@ router.post("/", async (req, res) => {
 });
 
 // UPDATE POST
-router.put("/:id", async (req, res) => {
+router.put("/:id", authorize, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (req.body.username === post.username) {
@@ -36,7 +37,7 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE POST
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorize, async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
         if (req.body.username === post.username) {

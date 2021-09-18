@@ -1,7 +1,8 @@
 import axios from "axios";
+//import jwt_decode from "jwt-decode"; // to decode the jwt token
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context/Context";
-import { UpdateStart, UpdateSuccess, UpdateFailure } from "../../../context/Actions";
+import { UpdateStart, UpdateSuccess, UpdateFailure, Logout, /*RenewTokens*/ } from "../../../context/Actions";
 import Sidebar from "../../sidebar/Sidebar";
 import './settings.css';
 
@@ -12,18 +13,67 @@ export default function Settings() {
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState(false);
 
-    const { user, dispatch } = useContext(Context);
+    const { user, isFetching, dispatch } = useContext(Context);
 
     useEffect(() => {
         const getUser = async () => {
-            const res = await axios.get(`/users/${user._id}`);
-            setUsername(res.data.username);
-            setEmail(res.data.email);
+            try {
+                const res = await axios.get(
+                    `/users/${user._id}`,
+                    {
+                        headers: {
+                            authorization: `Bearer ${user.accessToken}`
+                        }
+                    });
+                setUsername(res.data.username);
+                setEmail(res.data.email);
+            } catch (err) {
+                if (err.response.status === 401 || err.response.status === 403) {
+                    dispatch(Logout());
+                    window.location.replace("/login");
+                } else {
+                    console.log(err)
+                }
+            }
         }
         getUser();
-    }, [user._id]);
+    },[]);
 
     const imgDir = "http://localhost:8080/images";
+
+    // // renew access token and refresh token (JWT)
+    // const renewTokens = async () => {
+    //     try {
+    //         const res = await axios.post("/auth/refresh", { refreshToken: user.refreshToken });
+    //         dispatch(RenewTokens(res.data));
+    //         console.log(res.data, "renew Token data");
+    //         return res.data;
+    //     } catch (err) {
+    //         // code
+    //         console.log(err);
+    //     }
+    // }
+
+    // // creating a new instance of axios
+    // const axiosJWT = axios.create();
+
+    // // adding a request interceptor for axiosJWT instance
+    // // code in this will be executed before request being send (using axiosJWT instance)
+    // axiosJWT.interceptors.request.use(
+    //     async (config) => {
+    //         const accessTokenExpTime = jwt_decode(user.accessToken).exp; // to get expiration time of the access token
+    //         const currentTime = new Date().getTime() // gives current time in ms
+    //         if (accessTokenExpTime * 1000 < currentTime) { // multiplied by 1000 as exp is in seconds
+    //             // if access token expired
+    //             const data = await renewTokens();
+    //             config.headers["authorization"] = `Bearer ${data.accessToken}`; // set the header authorization of the request that being send with the renewed access token
+    //             return config;
+    //         }
+    //     },
+    //     (err) => {
+    //         return Promise.reject(err); // if error then reject the promise i.e., cancel everything
+    //     }
+    // );
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,14 +99,25 @@ export default function Settings() {
         }
         // update user
         try {
-            const res = await axios.put(`/users/${user._id}`, updatedUser);
+            const res = await axios.put(
+                `/users/${user._id}`,
+                updatedUser,
+                {
+                    headers: {
+                        authorization: `Bearer ${user.accessToken}`
+                    }
+                });
             setSuccess(true);
             dispatch(UpdateSuccess(res.data)); // could pass { type: "UPDATE_SUCCESS", payload: res.data }
             // window.location.replace(`/post/${res.data._id}`);
 
         } catch (err) {
-            // code
-            dispatch(UpdateFailure()); // could pass { type: "UPDATE_Failure" }
+            if (err.response.status === 401 || err.response.status === 403) {
+                dispatch(Logout());
+                window.location.replace("/login");
+            } else {
+                dispatch(UpdateFailure()); // could pass { type: "UPDATE_Failure" }
+            }
         }
     }
 
@@ -110,13 +171,13 @@ export default function Settings() {
                         placeholder="********"
                         required
                     />
-                    <button className="settingsSubmit" type="submit">Update</button>
+                    <button className="settingsSubmit" type="submit" disabled={isFetching}>Update</button>
                     {success && ( // how to use flash message here
                         <span
                             style={{ color: "green", textAlign: "center", marginTop: "20px" }}
                         >
                             Profile has been updated...
-                        </span>)} 
+                        </span>)}
                 </form>
             </div>
             <Sidebar />

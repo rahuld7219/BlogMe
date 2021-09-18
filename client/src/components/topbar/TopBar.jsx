@@ -3,14 +3,27 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "../../context/Context";
 import { Logout } from "../../context/Actions"
+// import axios from "axios"
 
 export default function Topbar() {
     const { user, dispatch } = useContext(Context);
 
     const imgDir = "http://localhost:8080/images";
 
-    const handleLogout = () => {
-        dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
+    const handleLogout = async () => {
+        // // can define logoutStart like loginStart
+        // try {
+        //     await axios.post(
+        //         "/auth/logout",
+        //         {
+        //             refreshToken: user.refreshToken,
+        //         }
+        //     );
+        //     // if logout successful
+            dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
+        // } catch (err) {
+        //     // can define logoutFailure like loginFailure
+        // }
     }
 
     return (

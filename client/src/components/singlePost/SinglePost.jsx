@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
+import { Logout } from '../../context/Actions';
 import './singlePost.css';
 
 export default function SinglePost() {
@@ -14,7 +15,7 @@ export default function SinglePost() {
     const [desc, setDesc] = useState("");
     const [updateMode, setUpdateMode] = useState(false);
 
-    const { user } = useContext(Context);
+    const { user, dispatch } = useContext(Context);
 
     useEffect(() => {
         const getPost = async () => {
@@ -32,10 +33,19 @@ export default function SinglePost() {
         try {
             await axios.delete(`/posts/${postId}`, {
                 data: { username: user.username } // unlike post/put/patch method, when using delete method in axios we must specify data property to send data
+            }, {
+                headers: {
+                    authorization: `Bearer ${user.accessToken}`
+                }
             });
             window.location.replace("/");
         } catch (err) {
-            // code
+            if (err.response.status === 401 || err.response.status === 403) {
+                dispatch(Logout());
+                window.location.replace("/login");
+            } else {
+                console.log(err);
+            }
         }
     }
 
@@ -45,10 +55,19 @@ export default function SinglePost() {
                 username: user.username,
                 title,
                 desc
+            }, {
+                headers: {
+                    authorization: `Bearer ${user.accessToken}`
+                }
             });
             window.location.reload();
         } catch (err) {
-            // code
+            if (err.response.status === 401 || err.response.status === 403) {
+                dispatch(Logout());
+                window.location.replace("/login");
+            } else {
+                console.log(err);
+            }
         }
     }
 

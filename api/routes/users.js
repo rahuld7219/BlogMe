@@ -2,10 +2,11 @@ const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const authorize = require("../middlewares");
 
 
 // UPDATE USER
-router.put("/:id", async (req, res) => {
+router.put("/:id", authorize, async (req, res) => {
     // checking if updating own account
     if (req.body.userId === req.params.id) { // should used session or JWT instead of this condition
         try {
@@ -31,9 +32,9 @@ router.put("/:id", async (req, res) => {
 });
 
 // DELETE USER
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authorize, async (req, res) => {
     // checking if deleting own account
-    if(req.body.userId === req.params.id) { // should used session or JWT instead of this condition
+    if(req.body.userId === req.params.id) {
         try {
             // if user exist
             const user = await User.findById(req.params.id);
@@ -56,7 +57,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // GET USER
-router.get("/:id", async (req, res) => {
+router.get("/:id", authorize, async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         const { password, ...rest } = user._doc;
