@@ -31,8 +31,8 @@
 
 .sidebarItem > img {
     margin-top: 15px;
-    width: 80%;
-    height: 40%;
+    width: 90%;
+    height: 60%;
     object-fit: cover;
 }
 
@@ -52,7 +52,7 @@
     cursor: pointer;
 }
 
-.sidebarSocial {
+.sidebarSocialBlock {
     margin-top: 15px;
     width: 250px;
     display: flex;

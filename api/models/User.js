@@ -17,7 +17,11 @@ const UserSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String, // will be a photo url
-        default: "" // default photo url
+        default: "defaultPic.png" // default photo url
+    },
+    about: {
+        type: String,
+        default: "Write Something About Yourself"
     }
 }, { timestamps: true }); // passed timestamps option to assign createdAt and updatedAt fields
 

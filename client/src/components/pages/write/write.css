@@ -19,17 +19,34 @@
     align-items: center;
 }
 
-.writeIcon {
+.writeImageIcon {
+    position: relative;
     width: 25px;
     height: 25px;
-    font-size: 20px;
-    border: 1px solid;
+    font-size: 30px;
+    border: none;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: rgb(121, 118, 118);
+    color: rgb(102, 101, 101);
+}
+
+.writeImageIconDesc {
+    width: max-content;
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    font-size: x-small;
+    color: rgb(148, 144, 144);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s, visibility .3s;
+}
+.writeImageIcon:hover .writeImageIconDesc {
+    visibility: visible;
+    opacity: 1;
 }
 
 .writeInput {
@@ -50,7 +67,7 @@
 
 .writeSubmit {
     position: absolute; /* for absolute position w.r.t. the parent, the parent's position should be defined relative, otherwise it will be positioned relative to the browser window*/
-    top: 20px;
+    top: 50px;
     right: 50px;
     font-size: 16px;
     color: white;
@@ -59,4 +76,31 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
+}
+
+.categoryList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20%;
+    margin-top: 15px;
+}
+
+.categoryListItem {
+    list-style: none;
+}
+
+.category {
+    background-color: cornsilk;
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: rgb(247, 212, 199);
+    border: 1px solid coral;
 }

@@ -5,18 +5,36 @@ import { Logout } from '../../../context/Actions';
 import './write.css';
 
 export default function Write() {
+    const categories = [
+        "Technology", "Travel", "Fashion",
+        "Food", "Education", "Spiritual",
+        "Finanace", "Entertainment", "Art",
+        "Business", "Gaming", "Lifestyle",
+        "Health", "Sports", "Politics"
+    ];
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [file, setFile] = useState(null);
+    const [checkedCategory, setCheckedCategory] = useState(
+        new Array(categories.length).fill(false)
+    )
 
     const { user, dispatch } = useContext(Context);
+
+    const handleCategorySelect = (position) => {
+        setCheckedCategory(checkedCategory => (
+            checkedCategory.map((category, index) => index === position ? !category : category)
+        )
+        );
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newPost = {
             title,
             desc,
-            username: user.username
+            username: user.username,
+            categories: categories.filter((item, index) => checkedCategory[index])
         };
         // To add and upload image file
         if (file) {
@@ -60,8 +78,35 @@ export default function Write() {
             }
             <form className="writeForm" onSubmit={handleSubmit}>
                 <div className="writeFormGroup">
+                    <ul className="categoryList">
+                        {categories.map((category, position) => {
+                            return (
+                                <li key={position} className="categoryListItem">
+                                    <label htmlFor={`categoryCheckbox-${position}`}>
+                                        <div
+                                            className="category"
+                                            style={{ backgroundColor: checkedCategory[position] && "#f7b39b" }}
+                                        >
+                                            {category}
+                                        </div>
+                                    </label>
+                                    <input
+                                        style={{ display: "none" }}
+                                        type="checkbox"
+                                        id={`categoryCheckbox-${position}`}
+                                        name={`category-${position}`}
+                                        value={category}
+                                        checked={checkedCategory[position]}
+                                        onChange={() => handleCategorySelect(position)}
+                                    />
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </div>
+                <div className="writeFormGroup">
                     <label htmlFor="fileInput">
-                        <i className="writeIcon fas fa-plus"></i>
+                        <i className="writeImageIcon far fa-file-image"><p className="writeImageIconDesc">Upload Image</p></i>
                     </label>
                     <input
                         type="file"

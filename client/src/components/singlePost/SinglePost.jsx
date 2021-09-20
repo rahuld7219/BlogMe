@@ -31,21 +31,24 @@ export default function SinglePost() {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(`/posts/${postId}`, {
-                data: { username: user.username } // unlike post/put/patch method, when using delete method in axios we must specify data property to send data
-            }, {
-                headers: {
-                    authorization: `Bearer ${user.accessToken}`
-                }
-            });
+            await axios.delete(
+                `/posts/${postId}`,
+                {
+                    data: {
+                        username: user.username
+                    }, // unlike post/put/patch method, when using delete method in axios we must specify data property to send data
+                    headers: {
+                        authorization: `Bearer ${user.accessToken}`
+                    }
+                });
             window.location.replace("/");
         } catch (err) {
-            if (err.response.status === 401 || err.response.status === 403) {
-                dispatch(Logout());
-                window.location.replace("/login");
-            } else {
-                console.log(err);
-            }
+            // if (err.response.status === 401 || err.response.status === 403) {
+            //     dispatch(Logout());
+            //     window.location.replace("/login");
+            // } else {
+            //     console.log(err);
+            // }
         }
     }
 

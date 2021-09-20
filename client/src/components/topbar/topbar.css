@@ -2,12 +2,9 @@
     height: 50px;
     width: 100%;
     background-color: white;
-    position: sticky; /* stick the topbar to a position */
-    top: 0; /* put the topbar at 0px from top */
     font-family: 'Josefin Sans', sans-serif;
     display: flex;
     align-items: center;
-    z-index: 999; /* put navbar above everything */
 }
 
 /* Splitting top into 12 parts(like in bootstrap), out of which topLeft and topRight given 3 parts each and topCenter given 6 parts */
@@ -22,6 +19,12 @@
     flex: 6;
 }
 
+.topTitle {
+    margin-right: 2vw;
+    font-size: 32px;
+    color: rgb(13, 156, 156);
+    font-weight: 700;   
+}
 .topIcon {
     font-size: 20px;
     margin-right: 10px;
@@ -46,10 +49,16 @@
 }
 
 .topListItem {
-    margin-right: 20px;
-    font-size: 18px;
-    font-weight: 300;
+    margin-right: 36px;
+    font-size: 24px;
+    font-weight: 400;
     cursor: pointer;
+    color: #444;
+    transition: color 0.2s;
+}
+
+.topListItem:hover {
+    color: rgb(68,68,68, 0.5);
 }
 
 .topSearchIcon {

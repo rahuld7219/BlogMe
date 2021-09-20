@@ -1,0 +1,24 @@
+.about {
+    background-color: rgba(172, 186, 201, 0.6);
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.about > p:nth-child(1) {
+    font-size: 50px;
+    color: white;
+    font-weight: 700;
+    margin-top: 8%;
+    margin-left: 5vw;
+}
+
+.about > p:nth-child(2) {
+    position: absolute;
+    top: 400px;
+    margin-left: 5vw;
+    font-family: "Varela Round", sans-serif;
+    font-size: 18px;
+    line-height: 20px;
+}

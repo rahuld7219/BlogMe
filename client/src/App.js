@@ -13,25 +13,41 @@ import {
 } from "react-router-dom";
 import { useContext } from "react";
 import { Context } from "./context/Context";
+import Footer from "./components/Footer/Footer";
+import Contact from "./components/pages/contact/Contact";
+import About from "./components/pages/about/About";
+import "./App.css";
 
 function App() {
   const { user } = useContext(Context);
   return (
-    <Router>
-      <TopBar />
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/register">{user ? <Home /> : <Register />}</Route>
-        <Route path="/login">{user ? <Home /> : <Login />}</Route>
-        <Route path="/write">{user ? <Write /> : <Login />}</Route>
-        <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
-        <Route path="/post/:postId">
-          <Single />
-        </Route>
-      </Switch>
-    </Router>
+    <div className="appContainer">
+      <Router>
+        <div className="navbarContainer">
+          <TopBar />
+        </div>
+        <div className="contentContainer">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/contact"><Contact /></Route>
+            <Route path="/about"><About /></Route>
+            <Route path="/register">{user ? <Home /> : <Register />}</Route>
+            <Route path="/login">{user ? <Home /> : <Login />}</Route>
+            <Route path="/write">{user ? <Write /> : <Login />}</Route>
+            <Route path="/settings">{user ? <Settings /> : <Login />}</Route>
+            <Route path="/post/:postId">
+              <Single />
+            </Route>
+          </Switch>
+
+        </div>
+        <div className="footerContainer">
+          <Footer />
+        </div>
+      </Router>
+    </div>
   );
 }
 

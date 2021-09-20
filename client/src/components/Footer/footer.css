@@ -1,0 +1,19 @@
+.footer {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 999;
+}
+
+.textMuted {
+    color: lightslategray;
+    cursor: pointer;
+}
+
+.copyright {
+    cursor: text;
+}

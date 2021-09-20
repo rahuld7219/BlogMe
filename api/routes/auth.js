@@ -17,7 +17,6 @@ router.post("/register", async (req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: hashedPass,
-            profilePic: "defaultPic.png"
         });
         const user = await newUser.save();
         res.status(200).json(user); // sending a json response instead of rendering page or sending text

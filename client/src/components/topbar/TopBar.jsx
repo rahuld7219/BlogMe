@@ -20,7 +20,7 @@ export default function Topbar() {
         //         }
         //     );
         //     // if logout successful
-            dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
+        dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
         // } catch (err) {
         //     // can define logoutFailure like loginFailure
         // }
@@ -29,6 +29,7 @@ export default function Topbar() {
     return (
         <div className="top">
             <div className="topLeft">
+                <div className="topTitle">BlogMe</div>
                 <i className="topIcon fab fa-facebook"></i> {/* font-awesome icon */}
                 <i className="topIcon fab fa-twitter"></i>
                 <i className="topIcon fab fa-instagram"></i>

@@ -1,0 +1,14 @@
+.navbarContainer {
+    position: sticky; /* stick the topbar to a position */
+    top: 0; /* put the topbar at 0px from top */
+    z-index: 999;
+}
+.contentContainer {
+  min-height: calc(100vh - 100px);
+}
+
+.footerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

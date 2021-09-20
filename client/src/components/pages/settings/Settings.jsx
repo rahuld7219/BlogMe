@@ -10,6 +10,7 @@ export default function Settings() {
     const [file, setFile] = useState(null);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [about, setAbout] = useState("");
     const [password, setPassword] = useState("");
     const [success, setSuccess] = useState(false);
 
@@ -27,6 +28,7 @@ export default function Settings() {
                     });
                 setUsername(res.data.username);
                 setEmail(res.data.email);
+                setAbout(res.data.about);
             } catch (err) {
                 if (err.response.status === 401 || err.response.status === 403) {
                     dispatch(Logout());
@@ -37,7 +39,7 @@ export default function Settings() {
             }
         }
         getUser();
-    },[]);
+    }, []);
 
     const imgDir = "http://localhost:8080/images";
 
@@ -75,14 +77,15 @@ export default function Settings() {
     //     }
     // );
 
-    const handleSubmit = async (e) => {
+    const handleUpdateUser = async (e) => {
         e.preventDefault();
         dispatch(UpdateStart()); // could pass { type: "UPDATE_START" }
         const updatedUser = {
             userId: user._id,
             username,
             email,
-            password
+            password,
+            about
         };
         // To add and upload image file
         if (file) {
@@ -121,14 +124,37 @@ export default function Settings() {
         }
     }
 
+    const handleDeleteUser = async () => {
+        const deleteUser = window.confirm("All your details including your posts will be DLETED PERMANENTLY...\
+        \nAre you sure you want to DELETE your account?");
+        if (deleteUser) {
+            try {
+                await axios.delete(
+                    `/users/${user._id}`,
+                    {
+                        data: {
+                            userId: user._id
+                        },
+                        headers: {
+                            authorization: `Bearer ${user.accessToken}`
+                        }
+                    });
+                dispatch(Logout());
+                window.location.replace("/");
+            } catch (err) {
+                console.log(err);
+            }
+        }
+    }
+
     return (
         <div className="settings">
             <div className="settingsWrapper">
                 <div className="settingsTitle">
                     <span className="settingsUpdateTitle">Update Account</span>
-                    <span className="settingsDeleteTitle"><b>Delete Account</b></span>
+                    <span className="settingsDeleteTitle" onClick={handleDeleteUser}><b>Delete Account</b></span>
                 </div>
-                <form className="settingsForm" onSubmit={handleSubmit}>
+                <form className="settingsForm" onSubmit={handleUpdateUser}>
                     <label>Profile Picture</label>
                     <div className="settingsProfilePic">
                         <img
@@ -163,10 +189,20 @@ export default function Settings() {
                         placeholder={user.email}
                         required
                     />
+                    <label htmlFor="about">About</label>
+                    <textarea
+                        id="about"
+                        type="text"
+                        rows={5}
+                        value={about}
+                        placeholder={user.about}
+                        onChange={(e) => setAbout(e.target.value)}
+                    />
                     <label htmlFor="password">Password</label>
                     <input
                         id="password"
                         type="password"
+                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="********"
                         required
