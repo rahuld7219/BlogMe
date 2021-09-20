@@ -53,6 +53,16 @@ app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 app.use("/api/categories", categoryRoute);
 
-app.listen(8080, () => {
+// specifying our client side as static files (to deploy on heroku for free by moving client side inside backend(node) folder)
+// hroku automatically create build folder
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+// to specify that any request to our site goes through the client folder
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
     console.log("Backend running at port 8080");
 });

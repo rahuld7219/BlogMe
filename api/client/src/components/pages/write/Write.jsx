@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../../../../src/config";
 import { useContext, useState } from 'react';
 import { Context } from '../../../context/Context';
 import { Logout } from '../../../context/Actions';
@@ -44,14 +44,14 @@ export default function Write() {
             fileData.append("file", file);
             newPost.photo = filename;
             try {
-                await axios.post("/upload", fileData);
+                await axiosInstance.post("/upload", fileData);
             } catch (err) {
                 // code
             }
         }
         // create post
         try {
-            const res = await axios.post("/posts", newPost, {
+            const res = await axiosInstance.post("/posts", newPost, {
                 headers: {
                     authorization: `Bearer ${user.accessToken}`
                 }

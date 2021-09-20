@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosInstance from "../../../../src/config";
 //import jwt_decode from "jwt-decode"; // to decode the jwt token
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context/Context";
@@ -19,7 +19,7 @@ export default function Settings() {
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get(
+                const res = await axiosInstance.get(
                     `/users/${user._id}`,
                     {
                         headers: {
@@ -41,7 +41,7 @@ export default function Settings() {
         getUser();
     }, []);
 
-    const imgDir = "http://localhost:8080/images";
+    const imgDir = "https://blog-mee.herokuapp.com/images";
 
     // // renew access token and refresh token (JWT)
     // const renewTokens = async () => {
@@ -95,14 +95,14 @@ export default function Settings() {
             fileData.append("file", file);
             updatedUser.profilePic = filename;
             try {
-                await axios.post("/upload", fileData);
+                await axiosInstance.post("/upload", fileData);
             } catch (err) {
                 // code
             }
         }
         // update user
         try {
-            const res = await axios.put(
+            const res = await axiosInstance.put(
                 `/users/${user._id}`,
                 updatedUser,
                 {
@@ -129,7 +129,7 @@ export default function Settings() {
         \nAre you sure you want to DELETE your account?");
         if (deleteUser) {
             try {
-                await axios.delete(
+                await axiosInstance.delete(
                     `/users/${user._id}`,
                     {
                         data: {

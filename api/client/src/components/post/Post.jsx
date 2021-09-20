@@ -1,7 +1,7 @@
 import './post.css';
 import { Link } from "react-router-dom";
 export default function Post({ post }) {
-    const imgDir = "http://localhost:8080/images";
+    const imgDir = "https://blog-mee.herokuapp.com/images";
     return (
         <div className="post">
             {post.photo && (

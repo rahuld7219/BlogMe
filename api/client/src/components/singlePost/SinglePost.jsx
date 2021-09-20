@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../../../src/config";
 import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ export default function SinglePost() {
 
     useEffect(() => {
         const getPost = async () => {
-            const res = await axios.get(`/posts/${postId}`);
+            const res = await axiosInstance.get(`/posts/${postId}`);
             setPost(res.data);
             setTitle(res.data.title);
             setDesc(res.data.desc);
@@ -27,11 +27,11 @@ export default function SinglePost() {
         getPost();
     }, [postId]);
 
-    const imgDir = "http://localhost:8080/images";
+    const imgDir = "https://blog-mee.herokuapp.com/images";
 
     const handleDelete = async () => {
         try {
-            await axios.delete(
+            await axiosInstance.delete(
                 `/posts/${postId}`,
                 {
                     data: {
@@ -54,7 +54,7 @@ export default function SinglePost() {
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`/posts/${postId}`, {
+            await axiosInstance.put(`/posts/${postId}`, {
                 username: user.username,
                 title,
                 desc

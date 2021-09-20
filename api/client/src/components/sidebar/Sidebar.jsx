@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from "../../../src/config";
 import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
@@ -9,12 +9,12 @@ export default function Sidebar() {
     const { user } = useContext(Context);
     useEffect(() => {
         const fetchCategories = async () => {
-            const res = await axios.get("/categories");
+            const res = await axiosInstance.get("/categories");
             setCategories(res.data);
         }
         fetchCategories();
     }, [])
-    const imgDir = "http://localhost:8080/images";
+    const imgDir = "https://blog-mee.herokuapp.com/images";
     return (
         <div className="sidebar">
             {user && (

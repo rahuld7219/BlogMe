@@ -1,7 +1,7 @@
 import "./login.css";
 import { Link } from "react-router-dom";
 import { useContext, useRef } from "react";
-import axios from "axios";
+import axiosInstance from "../../../../src/config";
 import { Context } from "../../../context/Context";
 import { LoginStart, LoginSuccess, LoginFailure } from "../../../context/Actions";
 
@@ -15,7 +15,7 @@ export default function Login() {
         e.preventDefault();
         dispatch(LoginStart()); // can write dispatch({ type: LOGIN_START }) directly
         try {
-            const res = await axios.post("/auth/login", {
+            const res = await axiosInstance.post("/auth/login", {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             });
