@@ -11,14 +11,16 @@ const PostSchema = new mongoose.Schema({
         required: true
     },
     photo: {
-        type: String // a URL for the photo
+        type: String, // a URL for the photo
+        default: "no_image_placeholder.png"
     },
     username: {
         type: String,
         required: true
     },
     categories: {
-        type: Array // an array of categories to which the post can belong to, eg: a post can belong to ["music", "life"]
+        type: Array, // an array of categories to which the post can belong to, eg: a post can belong to ["music", "life"]
+        required: true
     }
 }, { timestamps: true });
 

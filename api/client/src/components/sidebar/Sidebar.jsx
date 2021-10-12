@@ -14,7 +14,7 @@ export default function Sidebar() {
         }
         fetchCategories();
     }, [])
-    const imgDir = "https://blog-mee.herokuapp.com/images";
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
     return (
         <div className="sidebar">
             {user && (

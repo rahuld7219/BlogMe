@@ -78,6 +78,7 @@ export default function Write() {
             }
             <form className="writeForm" onSubmit={handleSubmit}>
                 <div className="writeFormGroup">
+                    <h1 className="categoriesHeader">Select one or more categories</h1><span>&rarr;</span>
                     <ul className="categoryList">
                         {categories.map((category, position) => {
                             return (

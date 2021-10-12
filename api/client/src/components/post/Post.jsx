@@ -1,7 +1,7 @@
 import './post.css';
 import { Link } from "react-router-dom";
 export default function Post({ post }) {
-    const imgDir = "https://blog-mee.herokuapp.com/images";
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
     return (
         <div className="post">
             {post.photo && (

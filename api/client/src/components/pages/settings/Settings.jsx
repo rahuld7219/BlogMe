@@ -41,7 +41,7 @@ export default function Settings() {
         getUser();
     }, []);
 
-    const imgDir = "https://blog-mee.herokuapp.com/images";
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
 
     // // renew access token and refresh token (JWT)
     // const renewTokens = async () => {

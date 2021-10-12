@@ -8,7 +8,7 @@ import { Logout } from "../../context/Actions"
 export default function Topbar() {
     const { user, dispatch } = useContext(Context);
 
-    const imgDir = "https://blog-mee.herokuapp.com/images";
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
 
     const handleLogout = async () => {
         // // can define logoutStart like loginStart

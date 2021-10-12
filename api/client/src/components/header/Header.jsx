@@ -1,6 +1,7 @@
 import './header.css';
 
 export default function Header() {
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
     return (
         <div className="header">
             <div className="headerTitles">
@@ -9,7 +10,7 @@ export default function Header() {
             </div>
             <img
                 className="headerImg"
-                src="https://images.unsplash.com/photo-1493612276216-ee3925520721?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmFuZG9tfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+                src={`${imgDir}/home.png`}
                 alt=""
             />
         </div>

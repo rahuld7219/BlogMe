@@ -1,7 +1,11 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
-    baseURL: "https://blog-mee.herokuapp.com/api",
-});
+const axiosInstance = process.env.NODE_ENV === "production" ? (
+    axios.create({
+        baseURL: "https://blog-mee.herokuapp.com/api",
+    })
+) : (
+    axios.create()
+);
 
 export default axiosInstance;

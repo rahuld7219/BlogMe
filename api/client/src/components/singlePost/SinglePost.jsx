@@ -27,7 +27,7 @@ export default function SinglePost() {
         getPost();
     }, [postId]);
 
-    const imgDir = "https://blog-mee.herokuapp.com/images";
+    const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
 
     const handleDelete = async () => {
         try {
