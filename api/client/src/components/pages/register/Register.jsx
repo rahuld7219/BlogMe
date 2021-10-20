@@ -30,6 +30,7 @@ export default function Register() {
                     type="text"
                     placeholder="Enter Your username..."
                     required
+                    value={username}
                     onChange={(e) => setUsername(e.target.value)}
                 />
                 <label>Email</label>
@@ -38,6 +39,7 @@ export default function Register() {
                     type="email"
                     required
                     placeholder="Enter Your Email..."
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
                 <label>Password</label>
@@ -46,6 +48,7 @@ export default function Register() {
                     type="password"
                     required
                     placeholder="Enter Your Password..."
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 <button className="registerButton">Register</button>
@@ -53,7 +56,7 @@ export default function Register() {
             <button className="registerLoginButton">
                 <Link className="link" to="/login">Login</Link>
             </button>
-            {error && <span style={{color: "red", marginTop: "10px"}}>Something went wrong!</span>}
+            {error && <span style={{color: "red", marginTop: "10px"}}>Something went wrong!</span>} {/* how to use flash message instead of this line */}
         </div>
     );
 }

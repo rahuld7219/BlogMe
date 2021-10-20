@@ -120,6 +120,7 @@ export default function Write() {
                         className="writeInput"
                         placeholder="Title"
                         autoFocus={true}
+                        value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
                     />
@@ -129,6 +130,7 @@ export default function Write() {
                         placeholder="Tell Your Story..."
                         type="text"
                         className="writeInput writeText"
+                        value={desc}
                         onChange={(e) => setDesc(e.target.value)}
                         required
                     ></textarea>

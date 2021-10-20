@@ -64,5 +64,5 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
-    console.log("Backend running at port 8080");
+    console.log("Backend running at port", port);
 });

@@ -8,7 +8,7 @@ const authorize = require("../middlewares");
 // UPDATE USER
 router.put("/:id", authorize, async (req, res) => {
     // checking if updating own account
-    if (req.body.userId === req.params.id) { // should used session or JWT instead of this condition
+    if (req.body.userId === req.params.id) {
         try {
             // if user want to update the password also
             if (req.body.password) {
