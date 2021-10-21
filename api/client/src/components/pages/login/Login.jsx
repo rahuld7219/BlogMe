@@ -13,15 +13,15 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(LoginStart()); // can write dispatch({ type: LOGIN_START }) directly
+        dispatch(LoginStart());
         try {
             const res = await axiosInstance.post("/auth/login", {
                 username: usernameRef.current.value,
                 password: passwordRef.current.value
             });
-            dispatch(LoginSuccess(res.data)); // can write dispatch({ type: LOGIN_SUCCESS, payload: res.data }) directly
+            dispatch(LoginSuccess(res.data));
         } catch (err) {
-            dispatch(LoginFailure()); // can write dispatch({ type: LOGIN_FAILURE }) directly
+            dispatch(LoginFailure());
         }
     }
 

@@ -56,7 +56,7 @@ export default function Register() {
             <button className="registerLoginButton">
                 <Link className="link" to="/login">Login</Link>
             </button>
-            {error && <span style={{color: "red", marginTop: "10px"}}>Something went wrong!</span>} {/* how to use flash message instead of this line */}
+            {error && <span style={{color: "red", marginTop: "10px"}}>Something went wrong!</span>}
         </div>
     );
 }

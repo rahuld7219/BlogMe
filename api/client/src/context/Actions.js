@@ -25,11 +25,6 @@ export const UpdateFailure = () => ({
     type: "UPDATE_FAILURE",
 });
 
-// export const RenewTokens = (newTokens) => ({
-//     type: "RENEW_TOKENS",
-//     payload: newTokens
-// });
-
 export const Logout = () => ({
     type: "LOGOUT",
 })

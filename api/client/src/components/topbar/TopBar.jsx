@@ -11,19 +11,7 @@ export default function Topbar() {
     const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
 
     const handleLogout = async () => {
-        // // can define logoutStart like loginStart
-        // try {
-        //     await axios.post(
-        //         "/auth/logout",
-        //         {
-        //             refreshToken: user.refreshToken,
-        //         }
-        //     );
-        //     // if logout successful
-        dispatch(Logout()); // can write dispatch({ type: LOGOUT }) directly instead
-        // } catch (err) {
-        //     // can define logoutFailure like loginFailure
-        // }
+        dispatch(Logout());
     }
 
     return (

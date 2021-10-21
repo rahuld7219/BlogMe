@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json()); // to parse the incoming requests with JSON payloads
 
 // specify images folder, whenever request comes for path /images
-app.use("/images", express.static(path.join(__dirname, "/images"))); // images should be in public folder and specify public folder path here instead
+app.use("/images", express.static(path.join(__dirname, "/images")));
 
 const dbUrl = process.env.DB_URL;
 mongoose.connect(dbUrl)
@@ -28,7 +28,7 @@ mongoose.connect(dbUrl)
     })
 
 // defining multer storage
-const storage = multer.diskStorage({ // we should use cloudinary/AWS, etc. instead of diskstorage
+const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, "images"); // specify the destination path as /images
     },

@@ -1,8 +1,7 @@
 import axiosInstance from "../../../../src/config";
-//import jwt_decode from "jwt-decode"; // to decode the jwt token
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../../context/Context";
-import { UpdateStart, UpdateSuccess, UpdateFailure, Logout, /*RenewTokens*/ } from "../../../context/Actions";
+import { UpdateStart, UpdateSuccess, UpdateFailure, Logout } from "../../../context/Actions";
 import Sidebar from "../../sidebar/Sidebar";
 import './settings.css';
 
@@ -43,43 +42,9 @@ export default function Settings() {
 
     const imgDir = process.env.NODE_ENV === "production" ? "https://blog-mee.herokuapp.com/images" : "http://localhost:8080/images";
 
-    // // renew access token and refresh token (JWT)
-    // const renewTokens = async () => {
-    //     try {
-    //         const res = await axios.post("/auth/refresh", { refreshToken: user.refreshToken });
-    //         dispatch(RenewTokens(res.data));
-    //         console.log(res.data, "renew Token data");
-    //         return res.data;
-    //     } catch (err) {
-    //         // code
-    //         console.log(err);
-    //     }
-    // }
-
-    // // creating a new instance of axios
-    // const axiosJWT = axios.create();
-
-    // // adding a request interceptor for axiosJWT instance
-    // // code in this will be executed before request being send (using axiosJWT instance)
-    // axiosJWT.interceptors.request.use(
-    //     async (config) => {
-    //         const accessTokenExpTime = jwt_decode(user.accessToken).exp; // to get expiration time of the access token
-    //         const currentTime = new Date().getTime() // gives current time in ms
-    //         if (accessTokenExpTime * 1000 < currentTime) { // multiplied by 1000 as exp is in seconds
-    //             // if access token expired
-    //             const data = await renewTokens();
-    //             config.headers["authorization"] = `Bearer ${data.accessToken}`; // set the header authorization of the request that being send with the renewed access token
-    //             return config;
-    //         }
-    //     },
-    //     (err) => {
-    //         return Promise.reject(err); // if error then reject the promise i.e., cancel everything
-    //     }
-    // );
-
     const handleUpdateUser = async (e) => {
         e.preventDefault();
-        dispatch(UpdateStart()); // could pass { type: "UPDATE_START" }
+        dispatch(UpdateStart());
         const updatedUser = {
             userId: user._id,
             username,
@@ -111,7 +76,7 @@ export default function Settings() {
                     }
                 });
             setSuccess(true);
-            dispatch(UpdateSuccess(res.data)); // could pass { type: "UPDATE_SUCCESS", payload: res.data }
+            dispatch(UpdateSuccess(res.data));
             // window.location.replace(`/post/${res.data._id}`);
 
         } catch (err) {
@@ -119,7 +84,7 @@ export default function Settings() {
                 dispatch(Logout());
                 window.location.replace("/login");
             } else {
-                dispatch(UpdateFailure()); // could pass { type: "UPDATE_Failure" }
+                dispatch(UpdateFailure());
             }
         }
     }
@@ -208,7 +173,7 @@ export default function Settings() {
                         required
                     />
                     <button className="settingsSubmit" type="submit" disabled={isFetching}>Update</button>
-                    {success && ( // how to use flash message here
+                    {success && (
                         <span
                             style={{ color: "green", textAlign: "center", marginTop: "20px" }}
                         >
